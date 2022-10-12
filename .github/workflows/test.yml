@@ -1,0 +1,19 @@
+name: Test Action
+
+on: [ workflow_dispatch ]
+
+jobs:
+  test:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        
+    runs-on: ${{ matrix.os }}
+    steps:
+      - id: no-input
+        uses: ./action.yml
+      - id: input
+        uses: ./action.yml
+        with:
+          who-to-greet: ${{ github.repository_owner }}
+          
